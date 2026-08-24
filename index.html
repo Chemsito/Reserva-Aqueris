@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#26070d">
+  <meta name="description" content="Reserva Aqueris — vinos y especialidades Don Salvattore en Arequipa. Consulta el catálogo y escríbenos por WhatsApp.">
+  <title>Reserva Aqueris | Vinos en Arequipa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Reserva Aqueris"><span class="brand-mark">RA</span><span><strong>Reserva Aqueris</strong><small>Selección de vinos · Arequipa</small></span></a>
+    <nav class="nav"><a href="#catalogo">Catálogo</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></nav>
+    <a class="btn btn-whatsapp btn-small" data-whatsapp href="#">WhatsApp</a>
+  </header>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow">RESERVA AQUERIS · AREQUIPA</p>
+        <h1 id="hero-title">Descubre una selección hecha para disfrutar</h1>
+        <p id="hero-subtitle">Vinos y especialidades Don Salvattore en Arequipa. Consulta disponibilidad y pedidos directamente por WhatsApp.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#catalogo">Ver catálogo</a><a class="btn btn-whatsapp" data-whatsapp href="#">Consultar por WhatsApp</a></div>
+        <div class="hero-trust"><span>Atención 24/7</span><span>Arequipa</span><span>Consulta directa</span></div>
+      </div>
+      <div class="hero-card"><p class="eyebrow">SELECCIÓN DESTACADA</p><div id="featured-mini" class="featured-mini skeleton"></div></div>
+    </section>
+    <section class="section intro" id="nosotros">
+      <div><p class="eyebrow">NUESTRA CARTA</p><h2>Una carta clara, elegante y siempre actualizada.</h2></div>
+      <p>Reserva Aqueris reúne una selección de vinos y especialidades Don Salvattore. Esta web es informativa: para confirmar disponibilidad, cajas, promociones o coordinar un pedido, el canal principal es WhatsApp.</p>
+    </section>
+    <section class="section catalog" id="catalogo">
+      <div class="section-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Encuentra tu vino</h2></div><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Buscar vino..."></label></div>
+      <div id="filters" class="filters"></div><div id="products" class="product-grid" aria-live="polite"></div><div id="empty" class="empty hidden">No encontramos productos con esos filtros.</div>
+    </section>
+    <section class="section contact" id="contacto">
+      <div><p class="eyebrow">CONTACTO DIRECTO</p><h2>¿Quieres confirmar stock o hacer una consulta?</h2><p id="location">Arequipa / Lara, Av. Salaverry / La Polar 07</p></div>
+      <div class="contact-actions"><a class="btn btn-whatsapp btn-large" data-whatsapp href="#">+51 967 539 019 · WhatsApp</a><span id="instagram">@Vinos_Aqueris</span></div>
+    </section>
+  </main>
+  <footer><div><strong>Reserva Aqueris</strong><span>Selección de vinos en Arequipa</span></div><div><span>© <span id="year"></span> Reserva Aqueris</span><a href="./admin.html">Administración</a></div></footer>
+  <dialog id="product-modal" class="modal"><button class="modal-close" data-close aria-label="Cerrar">×</button><div id="modal-content"></div></dialog>
+  <a class="floating-whatsapp" data-whatsapp href="#" aria-label="WhatsApp">WA</a>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script><script src="./app.js"></script>
+</body>
+</html>
