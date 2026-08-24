@@ -62,7 +62,7 @@ function render(){
   const list = state.products.filter(p => (state.category === 'Todos' || p.category === state.category) && (!q || `${p.name} ${p.category} ${p.description || ''}`.toLowerCase().includes(q)));
   $('#products').innerHTML = list.map(card).join('');
   $('#empty').classList.toggle('hidden', list.length > 0);
-  $$('[data-open]').forEach(b => b.addEventListener('click', () => openProduct(b.dataset.open)));
+  $$('[data-open]', $('#products')).forEach(b => b.addEventListener('click', () => openProduct(b.dataset.open)));
 }
 function renderFilters(){
   const cats = ['Todos', ...new Set(state.products.map(p => p.category).filter(Boolean))];
