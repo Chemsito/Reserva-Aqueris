@@ -3,6 +3,11 @@ const db = supabase.createClient(supabaseUrl, supabaseKey);
 const state = { products: [], settings: null, category: 'Todos', search: '' };
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const SPRITE_INDEX = {
+  'perfecto-amor':0,'borgona':1,'borgona-exportacion':2,'vino-de-higo':3,'borgona-coleccion-especial':4,'tinto-semi-seco':5,
+  'tinto-seco':6,'mistela':7,'borgona-blanco':8,'romance':9,'vino-de-misa':10,'oporto':11,'borgona-sombreron':12,'rose-sombreron':13,
+  'perfecto-amor-sombreron':14,'tinto-semi-seco-sombreron':15,'reserva-privada-damajuana':16,'champagne-espumante':17
+};
 
 function esc(value='') { return String(value).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch])); }
 function money(v){ return v == null ? 'Consultar' : `S/${Number(v).toFixed(2)}`; }
@@ -13,14 +18,17 @@ function imageUrl(path){
   return db.storage.from(storageBucket).getPublicUrl(path).data.publicUrl;
 }
 function spriteStyle(p){
-  const i = Math.max(0, Math.min(17, (Number(p.sort_order) || 1) - 1));
+  const i = SPRITE_INDEX[p.slug];
+  if(i == null) return null;
   const col = i % 6, row = Math.floor(i / 6);
   return `--sprite-x:${col * 20}%;--sprite-y:${row * 50}%;`;
 }
 function catalogVisual(p, extra=''){
   const custom = imageUrl(p.image_path);
   if(custom) return `<img class="catalog-photo ${extra}" src="${esc(custom)}" alt="${esc(p.name)}" loading="lazy" onerror="this.classList.add('image-error')">`;
-  return `<div class="catalog-sprite ${extra}" style="${spriteStyle(p)}" role="img" aria-label="${esc(p.name)}"></div>`;
+  const sprite = spriteStyle(p);
+  if(sprite) return `<div class="catalog-sprite ${extra}" style="${sprite}" role="img" aria-label="${esc(p.name)}"></div>`;
+  return `<img class="catalog-photo ${extra}" src="${window.AQ_LOGO || ''}" alt="${esc(p.name)}" style="object-fit:contain;padding:22%;background:#e4dbce">`;
 }
 function whatsappUrl(product){
   const n = state.settings?.whatsapp || '51967539019';
