@@ -1,6 +1,6 @@
 const { supabaseUrl, supabaseKey, storageBucket } = window.AQUERIS_CONFIG;
 const db = supabase.createClient(supabaseUrl, supabaseKey);
-const state = { products: [], categories: [], settings: null, category: 'Todos', search: '' };
+const state = { products: [], categories: [], categoriesLoaded: false, settings: null, category: 'Todos', search: '' };
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const SPRITE_INDEX = {
@@ -116,10 +116,6 @@ function updateSeo(product=null){
   const canonical=$('#canonical-url'); if(canonical) canonical.href=url;
   updateStructuredData(product);
 }
-function availabilityPill(p){
-  const a=availability(p);
-  return `<span class="availability-pill ${a.className}">${esc(a.label)}</span>`;
-}
 function productBadges(p){
   const left = p.featured ? '<span class="badge">Selección</span>' : '';
   const right = p.badge ? `<span class="badge badge-secondary">${esc(p.badge)}</span>` : '';
@@ -153,12 +149,12 @@ function render(){
   });
   $('#products').innerHTML = list.map(card).join('');
   $('#empty').classList.toggle('hidden', list.length > 0);
-  $('#catalog-status').textContent = list.length ? `${list.length} ${list.length===1?'presentación':'presentaciones'} en la carta.` : '';
+  if(!$('#catalog-status').classList.contains('error')) $('#catalog-status').textContent = list.length ? `${list.length} ${list.length===1?'presentación':'presentaciones'} en la carta.` : '';
   $$('[data-open]', $('#products')).forEach(b => b.addEventListener('click', () => openProduct(b.dataset.open)));
 }
 function renderFilters(){
   const ordered = state.categories.filter(c=>c.active).map(c=>c.name);
-  const legacy = state.products.map(p=>p.category).filter(Boolean).filter(name=>!ordered.includes(name));
+  const legacy = state.categoriesLoaded ? [] : state.products.map(p=>p.category).filter(Boolean).filter(name=>!ordered.includes(name));
   const cats = ['Todos', ...ordered, ...new Set(legacy)];
   if(!cats.includes(state.category)) state.category='Todos';
   $('#filters').innerHTML = cats.map(c => `<button class="filter ${c === state.category ? 'active' : ''}" data-category="${esc(c)}">${esc(c)}</button>`).join('');
@@ -262,7 +258,7 @@ async function load(){
   ]);
   if(pErr){ console.error(pErr); $('#catalog-status').textContent='No se pudo cargar la carta. Intenta nuevamente.'; $('#catalog-status').classList.add('error'); }
   else state.products = products || [];
-  if(cErr) console.warn('Categorías no disponibles:',cErr.message); else state.categories=categories||[];
+  if(cErr) console.warn('Categorías no disponibles:',cErr.message); else { state.categories=categories||[]; state.categoriesLoaded=true; }
   if(!sErr && settings) hydrateSettings(settings); else { hydrateWhatsApp(); updateSeo(); }
   renderShowcase(); renderFilters(); render();
   const deepLink=new URL(location.href).searchParams.get('vino');
@@ -274,6 +270,7 @@ async function load(){
 
 $('#search').addEventListener('input', e => { state.search = e.target.value; render(); });
 $('#product-modal').addEventListener('click', e => { if(e.target === $('#product-modal')) closeProduct(); });
+$('#product-modal').addEventListener('close',()=>{ if(new URL(location.href).searchParams.has('vino')) history.replaceState({},'',baseUrl()); updateSeo(); });
 $('[data-close]').addEventListener('click', () => closeProduct());
 window.addEventListener('popstate',()=>{
   const slug=new URL(location.href).searchParams.get('vino');
