@@ -8,6 +8,36 @@
 .story-copy #story-body{white-space:pre-line}
 .admin-panel+.admin-panel{margin-top:0}.admin-section-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.72fr);gap:24px;margin-top:24px}.category-list{display:grid;gap:9px}.category-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:13px 14px;border:1px solid rgba(84,28,27,.13);border-radius:12px;background:rgba(255,255,255,.34)}.category-row strong{display:block;color:var(--wine)}.category-row span{display:block;margin-top:3px;color:var(--muted);font-size:10px}.category-row.inactive{opacity:.58}.category-actions{display:flex;gap:7px}.category-editor-note{margin:0 0 14px;color:var(--muted);font-size:11px;line-height:1.6}.form-grid select{width:100%;border:1px solid rgba(84,28,27,.2);border-radius:10px;padding:12px 13px;background:rgba(255,255,255,.62);color:var(--ink);outline:none}.form-grid select:focus{border-color:rgba(84,28,27,.48);box-shadow:0 0 0 3px rgba(84,28,27,.06)}.field-help{display:block;margin-top:5px;color:var(--muted);font-size:9px;line-height:1.45}.admin-row .availability-pill{margin-top:7px}.admin-row-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:5px}
 .seo-preview{padding:14px 16px;border:1px solid rgba(84,28,27,.12);background:rgba(255,255,255,.35);border-radius:12px}.seo-preview strong{display:block;color:#244a8f;font-size:15px}.seo-preview span{display:block;color:#3c7a41;font-size:10px;margin:4px 0}.seo-preview p{margin:0;color:#625a55;font-size:11px;line-height:1.55}
+
+/* Identidad Aqueris: el logo oficial se presenta como medallón circular en toda la web. */
+[data-brand-logo],.modal-logo{
+  aspect-ratio:1/1!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  border-radius:50%!important;
+  clip-path:circle(50%)!important;
+  padding:8%!important;
+  background:radial-gradient(circle at 50% 42%,#fbf7f0 0 54%,#f1e6d7 100%)!important;
+  border:1px solid rgba(176,138,60,.88)!important;
+  box-shadow:0 0 0 4px rgba(255,255,255,.52),0 12px 30px rgba(73,39,29,.15)!important;
+}
+.brand-logo{width:66px!important;height:66px!important;flex:0 0 66px!important}
+.hero-brand-seal img{width:102px!important;height:102px!important;flex:0 0 102px!important}
+.story-mark img{width:210px!important;height:210px!important}
+.contact-logo img{width:150px!important;height:150px!important}
+.footer-brand img{width:64px!important;height:64px!important;flex:0 0 64px!important}
+.auth-logo img{width:150px!important;height:150px!important}
+.modal-logo{width:92px!important;height:92px!important}
+
 @media (max-width:1050px){.admin-section-grid{grid-template-columns:1fr}.detail-specs{grid-template-columns:1fr 1fr}}
 @media (max-width:720px){.catalog-note{align-items:flex-start}.product-copy>p{min-height:0}.detail-specs{grid-template-columns:1fr}.modal-secondary-actions{grid-template-columns:1fr}.product-qr-wrap{flex-direction:column;text-align:center}.product-qr-wrap canvas{width:150px!important;height:150px!important}.product-heading-top{align-items:flex-start;flex-direction:column}.category-row{grid-template-columns:1fr}.category-actions{justify-content:flex-start}}
+@media (max-width:650px){
+  .brand-logo{width:56px!important;height:56px!important;flex-basis:56px!important}
+  .hero-brand-seal img{width:84px!important;height:84px!important;flex-basis:84px!important}
+  .story-mark img{width:170px!important;height:170px!important}
+  .contact-logo img{width:128px!important;height:128px!important}
+  .footer-brand img{width:56px!important;height:56px!important;flex-basis:56px!important}
+  .auth-logo img{width:132px!important;height:132px!important}
+  .modal-logo{width:78px!important;height:78px!important}
+}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
